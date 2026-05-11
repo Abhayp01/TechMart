@@ -7,7 +7,7 @@ import OrderNotification from "@/emails/OrderNotification";
 import OrderConfirmation from "@/emails/OrderConfirmation";
 import { render } from "@react-email/render";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key");
 
 export async function POST(req: Request) {
   try {

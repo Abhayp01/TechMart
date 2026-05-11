@@ -46,6 +46,7 @@ export default async function StoreHome() {
     price: p.price,
     mrp: p.mrp,
     sku: p.sku,
+    slug: p.slug,
     brand: p.brand,
     image: p.images?.[0] || "",
     stock: p.stock,

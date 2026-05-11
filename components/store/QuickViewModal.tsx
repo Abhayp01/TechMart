@@ -17,6 +17,7 @@ interface QuickViewModalProps {
     image?: string;
     images?: string[];
     sku: string;
+    slug?: string;
     brand: string;
     stock?: number;
     description?: string;

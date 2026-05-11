@@ -14,6 +14,7 @@ interface ProductCardProps {
   mrp?: number;
   image?: string;
   sku: string;
+  slug?: string;
   brand: string;
   stock?: number;
   rating?: number;
