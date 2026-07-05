@@ -1,6 +1,6 @@
-# TechNest - Premium Electronics eCommerce
+# BK Infotech - Premium Electronics eCommerce
 
-TechNest is a visually stunning, production-ready eCommerce web application built with Next.js (App Router), TypeScript, and MongoDB.
+BK Infotech is a visually stunning, production-ready eCommerce web application built with Next.js (App Router), TypeScript, and MongoDB.
 
 ## Features
 
@@ -27,7 +27,7 @@ TechNest is a visually stunning, production-ready eCommerce web application buil
    Ensure `.env.local` is present at the root of the project with:
    ```env
    MONGODB_URI=mongodb://localhost:27017/technest
-   JWT_SECRET=supersecretjwtkey12345
+   JWT_SECRET=
    JWT_EXPIRES_IN=7d
    NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
@@ -46,5 +46,5 @@ TechNest is a visually stunning, production-ready eCommerce web application buil
 
 ## Test Credentials
 
-- **Admin Account**: `admin@technest.com` / `Admin@123`
-- **User Account**: `user@technest.com` / `User@123`
+- **Admin Account**: `[EMAIL_ADDRESS]` / `Admin@123`
+- **User Account**: `[EMAIL_ADDRESS]` / `User@123`
