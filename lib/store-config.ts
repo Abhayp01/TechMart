@@ -1,129 +1,234 @@
 export const storeConfig = {
-  storeName: "NEXUS CORE",
-  supportEmail: "support@nexuscore.com",
-  phone: "1-800-NEXUS-CORE",
-  
-  hero: [
-    {
-      headline: "PRECISION ENGINEERED.",
-      subheadline: "Where uncompromising performance meets absolute design.",
-      ctaText: "EXPLORE LAPTOPS",
-      ctaLink: "/products?category=laptops",
-      image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Minimalist black tech"
-    },
-    {
-      headline: "ENTERPRISE NETWORKING.",
-      subheadline: "Seamless connectivity for the modern infrastructure.",
-      ctaText: "UPGRADE NETWORK",
-      ctaLink: "/products?category=networking",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Network switches"
-    }
+  storeName: "B.K. Infotech",
+  tagline: "Enterprise IT Solutions",
+  supportEmail: "bkinfotech2006@gmail.com",
+  phone: "+91-9811582155",
+  whatsapp: "https://wa.me/919811582155",
+  established: 2006,
+
+  hero: {
+    headline: "Enterprise IT Solutions\nFor Modern Businesses.",
+    subheadline: "Powering businesses, professionals, and individual buyers with premium laptops, desktops, networking, enterprise hardware, UPS, and custom-built PCs.",
+    ctaPrimary: { text: "Shop Products", link: "/products" },
+    ctaSecondary: { text: "Build Your PC", link: "/custom-build" },
+    images: [
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=600&q=80",
+    ],
+  },
+
+  trustMetrics: [
+    { value: 20, suffix: "+", label: "Years Experience", icon: "Award" },
+    { value: 5000, suffix: "+", label: "Happy Customers", icon: "Users" },
+    { value: 50, suffix: "+", label: "Brands Available", icon: "Building" },
+    { value: 24, suffix: "/7", label: "Expert Support", icon: "Headphones" },
+    { value: 100, suffix: "%", label: "Genuine Products", icon: "ShieldCheck" },
   ],
 
-  trustBar: [
-    { icon: "Shield", title: "GENUINE PRODUCTS", description: "100% authentic hardware" },
-    { icon: "Truck", title: "FREE DELIVERY", description: "On orders above ₹999" },
-    { icon: "RefreshCw", title: "EASY RETURNS", description: "7-day hassle-free returns" },
-    { icon: "Headphones", title: "EXPERT SUPPORT", description: "24/7 technical assistance" }
+  brands: [
+    { name: "Apple", slug: "apple" },
+    { name: "Dell", slug: "dell" },
+    { name: "HP", slug: "hp" },
+    { name: "Lenovo", slug: "lenovo" },
+    { name: "ASUS", slug: "asus" },
+    { name: "MSI", slug: "msi" },
+    { name: "Cisco", slug: "cisco" },
+    { name: "TP-Link", slug: "tp-link" },
+    { name: "Logitech", slug: "logitech" },
+    { name: "Microsoft", slug: "microsoft" },
+    { name: "Intel", slug: "intel" },
+    { name: "AMD", slug: "amd" },
+    { name: "Nvidia", slug: "nvidia" },
+    { name: "D-Link", slug: "d-link" },
   ],
 
   categories: [
-    { 
-      id: "laptops", 
-      name: "LAPTOPS", 
-      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80", 
+    {
+      id: "laptops",
+      name: "Laptops",
+      description: "Business, gaming & ultrabooks from top brands",
+      image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
       link: "/products?category=laptops",
-      subcategories: ["Gaming Laptops", "Business Laptops", "Ultrabooks", "Workstation Laptops", "Student Laptops"],
+      subcategories: ["Gaming Laptops", "Business Laptops", "Ultrabooks", "Student Laptops"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox" },
-        { id: "processor", label: "Processor", type: "checkbox", options: ["Intel i3", "Intel i5", "Intel i7", "Intel i9", "AMD Ryzen 3", "AMD Ryzen 5", "AMD Ryzen 7", "AMD Ryzen 9"] },
-        { id: "ram", label: "RAM", type: "checkbox", options: ["4GB", "8GB", "16GB", "32GB", "64GB"] },
-        { id: "storage", label: "Storage", type: "checkbox", options: ["256GB SSD", "512GB SSD", "1TB SSD", "2TB SSD", "HDD"] },
-        { id: "displaySize", label: "Display Size", type: "checkbox", options: ["11\"", "13\"", "14\"", "15.6\"", "17.3\""] },
-        { id: "gpu", label: "GPU", type: "checkbox", options: ["Integrated", "GTX Series", "RTX Series", "AMD Radeon"] },
-        { id: "os", label: "OS", type: "checkbox", options: ["Windows 11", "macOS", "Linux", "FreeDOS"] }
-      ]
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Apple", "Dell", "HP", "Lenovo", "ASUS", "MSI"] },
+      ],
     },
-    { 
-      id: "desktops", 
-      name: "DESKTOPS & WORKSTATIONS", 
-      image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80", 
+    {
+      id: "desktops",
+      name: "Desktop PCs",
+      description: "Pre-built, all-in-ones & custom configurations",
+      image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80",
       link: "/products?category=desktops",
-      subcategories: ["Pre-built Gaming PCs", "Office Desktops", "All-in-One PCs", "Mini PCs", "Servers"],
+      subcategories: ["Pre-built PCs", "All-in-One PCs", "Mini PCs", "Gaming Desktops"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox" },
-        { id: "processor", label: "Processor", type: "checkbox" },
-        { id: "ram", label: "RAM", type: "checkbox" },
-        { id: "formFactor", label: "Form Factor", type: "checkbox", options: ["Tower", "SFF", "AIO", "Mini"] }
-      ]
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Apple", "Dell", "HP", "Lenovo"] },
+      ],
     },
-    { 
-      id: "networking", 
-      name: "NETWORKING", 
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80", 
+    {
+      id: "networking",
+      name: "Networking",
+      description: "Routers, switches, access points & structured cabling",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
       link: "/products?category=networking",
-      subcategories: ["Wi-Fi Routers", "Managed Switches", "Unmanaged Switches", "Access Points", "Network Adapters", "Patch Panels", "Firewalls & UTM"],
+      subcategories: ["Routers", "Switches", "Access Points", "Firewalls", "Cabling"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["TP-Link", "Netgear", "Ubiquiti", "Cisco", "D-Link"] },
-        { id: "standard", label: "Standard", type: "checkbox", options: ["WiFi 5", "WiFi 6", "WiFi 6E", "WiFi 7"] },
-        { id: "speed", label: "Speed", type: "checkbox", options: ["100Mbps", "1Gbps", "2.5Gbps", "10Gbps"] },
-        { id: "ports", label: "Ports", type: "checkbox", options: ["4", "8", "16", "24", "48"] },
-        { id: "poe", label: "PoE Support", type: "checkbox", options: ["Yes", "No"] }
-      ]
+        { id: "brand", label: "Brand", type: "checkbox", options: ["D-Link", "Cisco", "TP-Link"] },
+      ],
     },
-    { 
-      id: "cctv", 
-      name: "CCTV & SURVEILLANCE", 
-      image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80", 
-      link: "/products?category=cctv",
-      subcategories: ["IP Cameras", "Analog Cameras", "DVR Systems", "NVR Systems", "Complete Kits", "PTZ Cameras", "Doorbells"],
+    {
+      id: "printers",
+      name: "Printers",
+      description: "Laser, inkjet & all-in-one printers for every need",
+      image: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80",
+      link: "/products?category=printers",
+      subcategories: ["Laser Printers", "Inkjet Printers", "All-in-One Printers", "Label Printers"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox" },
-        { id: "resolution", label: "Resolution", type: "checkbox", options: ["720p", "1080p", "2MP", "4MP", "8MP", "4K"] },
-        { id: "cameraType", label: "Camera Type", type: "checkbox", options: ["Bullet", "Dome", "PTZ", "Fisheye"] },
-        { id: "weatherproof", label: "Weatherproof", type: "checkbox", options: ["IP66", "IP67"] },
-        { id: "channels", label: "Channels", type: "checkbox", options: ["4", "8", "16", "32"] }
-      ]
+        { id: "brand", label: "Brand", type: "checkbox", options: ["HP", "Epson", "Canon", "Brother"] },
+      ],
     },
-    { 
-      id: "accessories", 
-      name: "ACCESSORIES", 
-      image: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=800&q=80", 
+    {
+      id: "ups",
+      name: "UPS & Power",
+      description: "Protect your systems with reliable power backup",
+      image: "https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&w=800&q=80",
+      link: "/products?category=ups",
+      subcategories: ["Line Interactive", "Online UPS", "Inverters"],
+      filters: [
+        { id: "brand", label: "Brand", type: "checkbox", options: ["APC", "Luminous", "Microtek"] },
+      ],
+    },
+    {
+      id: "accessories",
+      name: "Accessories",
+      description: "Keyboards, mice, headsets, storage & more",
+      image: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=800&q=80",
       link: "/products?category=accessories",
-      subcategories: ["Monitors", "Keyboards & Mice", "Headsets", "Webcams", "UPS & Power", "External Storage", "Cables & Adapters", "Cooling & Fans"],
+      subcategories: ["Keyboards", "Mice", "Headsets", "Storage", "Webcams", "Cables"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox" },
-        { id: "compatibility", label: "Compatibility", type: "checkbox", options: ["Windows", "Mac", "Universal"] }
-      ]
-    }
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Logitech", "HP", "Dell", "SanDisk"] },
+      ],
+    },
+    {
+      id: "gaming",
+      name: "Gaming PCs",
+      description: "Custom-built gaming rigs with latest hardware",
+      image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80",
+      link: "/custom-build",
+      subcategories: ["Entry Gaming", "Mid-Range", "High-End", "Ultra Enthusiast"],
+      filters: [],
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise",
+      description: "Servers, rack infrastructure & bulk hardware",
+      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
+      link: "/business",
+      subcategories: ["Servers", "Storage", "Rack Infrastructure"],
+      filters: [],
+    },
   ],
 
-  paginationType: 'numbered', // 'loadmore' or 'numbered'
+  services: [
+    { icon: "Wrench", title: "Laptop & PC Repair", description: "Expert diagnostics and repair for all brands" },
+    { icon: "Shield", title: "Annual Maintenance", description: "Comprehensive AMC plans for businesses" },
+    { icon: "Network", title: "Network Installation", description: "Structured cabling & enterprise networking" },
+    { icon: "Cpu", title: "Custom PC Assembly", description: "Tailored builds for gaming & workstations" },
+    { icon: "HardDrive", title: "Data Recovery", description: "Professional data recovery from failed drives" },
+    { icon: "Printer", title: "Printer Service", description: "Repair & maintenance for all printer types" },
+    { icon: "Monitor", title: "IT Consultation", description: "Expert guidance for your technology needs" },
+    { icon: "Server", title: "Server Setup", description: "Enterprise server deployment & configuration" },
+  ],
+
+  whyChooseUs: [
+    { icon: "Award", title: "Certified Engineers", description: "Factory-trained technicians for all major brands" },
+    { icon: "ShieldCheck", title: "Genuine Hardware", description: "100% authentic products with manufacturer warranty" },
+    { icon: "Truck", title: "Quick Delivery", description: "Same-day delivery across Delhi NCR region" },
+    { icon: "Building", title: "Authorized Partner", description: "Official partner of Dell, HP, Lenovo & more" },
+    { icon: "Headphones", title: "24/7 Support", description: "Round-the-clock technical support team" },
+    { icon: "Receipt", title: "Enterprise Procurement", description: "Bulk ordering with competitive pricing" },
+    { icon: "Wrench", title: "Annual Maintenance", description: "Comprehensive AMC contracts available" },
+    { icon: "BadgeCheck", title: "Warranty Support", description: "Hassle-free warranty claims processing" },
+  ],
+
+  businessSolutions: [
+    { icon: "Building2", title: "Corporate IT", description: "End-to-end IT infrastructure for enterprises", audience: "Companies & MNCs" },
+    { icon: "GraduationCap", title: "Education", description: "Computer labs, smart classrooms & networking", audience: "Schools & Universities" },
+    { icon: "Landmark", title: "Government", description: "GeM-registered vendor for government procurement", audience: "PSUs & Government" },
+    { icon: "Users", title: "Startups & SMBs", description: "Scalable IT solutions within your budget", audience: "Startups & Small Business" },
+  ],
+
+  testimonials: [
+    {
+      name: "Rajesh Kumar",
+      role: "IT Manager",
+      company: "Delhi Public School",
+      quote: "B.K. Infotech set up our entire computer lab with 50 systems. Excellent service and the AMC has been worry-free for 3 years now.",
+      rating: 5,
+    },
+    {
+      name: "Priya Sharma",
+      role: "Procurement Head",
+      company: "Axis Solutions Pvt Ltd",
+      quote: "We've been sourcing all our office hardware from B.K. Infotech since 2018. Their enterprise pricing and quick delivery are unmatched in Nehru Place.",
+      rating: 5,
+    },
+    {
+      name: "Amit Verma",
+      role: "Gamer & Content Creator",
+      company: "",
+      quote: "Got my custom gaming PC built here — RTX 4070, Ryzen 7, the works. They helped me choose every component within budget. Incredible build quality!",
+      rating: 5,
+    },
+    {
+      name: "Sunita Joshi",
+      role: "Office Administrator",
+      company: "National Law University",
+      quote: "Reliable vendor for all our printing and networking needs. Their service response time is the best we've experienced.",
+      rating: 4,
+    },
+  ],
+
+  paginationType: "numbered" as const,
   productsPerPage: 24,
 
-  featuredBrands: [
-    { name: "Asus", logo: "/brands/asus.png", slug: "asus" },
-    { name: "Dell", logo: "/brands/dell.png", slug: "dell" },
-    { name: "HP", logo: "/brands/hp.png", slug: "hp" },
-    { name: "TP-Link", logo: "/brands/tplink.png", slug: "tp-link" },
-    { name: "Hikvision", logo: "/brands/hikvision.png", slug: "hikvision" },
-    { name: "Logitech", logo: "/brands/logitech.png", slug: "logitech" },
-  ],
-
   footer: {
-    text: "© 2026 Nexus Core. Precision engineered in the dark.",
-    address: "Cyber City, Gurgaon, Haryana, India - 122002",
-    links: [
-      { label: "Terms", href: "/terms" },
-      { label: "Privacy", href: "/privacy" },
-      { label: "Returns", href: "/returns" }
-    ],
+    text: `© ${new Date().getFullYear()} B.K. Infotech. All rights reserved.`,
+    address: "B-5 Basement, Deepak Building 13, Nehru Place, New Delhi - 110019",
+    hours: "Mon-Sat: 10:00 AM - 8:00 PM",
+    links: {
+      products: [
+        { label: "Laptops", href: "/products?category=laptops" },
+        { label: "Desktops", href: "/products?category=desktops" },
+        { label: "Printers", href: "/products?category=printers" },
+        { label: "Networking", href: "/products?category=networking" },
+        { label: "UPS & Power", href: "/products?category=ups" },
+        { label: "Accessories", href: "/products?category=accessories" },
+      ],
+      services: [
+        { label: "Laptop Repair", href: "/services" },
+        { label: "Custom PC Build", href: "/custom-build" },
+        { label: "AMC Plans", href: "/services" },
+        { label: "Network Setup", href: "/services" },
+        { label: "Data Recovery", href: "/services" },
+        { label: "Enterprise Solutions", href: "/business" },
+      ],
+      support: [
+        { label: "Contact Us", href: "/contact" },
+        { label: "Track Order", href: "/track" },
+        { label: "Returns & Refunds", href: "/returns" },
+        { label: "Warranty", href: "/warranty" },
+        { label: "FAQs", href: "/faq" },
+      ],
+    },
     socials: [
       { platform: "Instagram", url: "#" },
+      { platform: "Facebook", url: "#" },
       { platform: "YouTube", url: "#" },
-      { platform: "WhatsApp", url: "https://wa.me/919876543210" }
-    ]
-  }
+      { platform: "LinkedIn", url: "#" },
+      { platform: "WhatsApp", url: "https://wa.me/919811582155" },
+    ],
+  },
 };

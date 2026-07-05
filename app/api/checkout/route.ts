@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/db";
-import Product from "@/models/Product";
-import Order from "@/models/Order";
 import { Resend } from "resend";
-import OrderNotification from "@/emails/OrderNotification";
-import OrderConfirmation from "@/emails/OrderConfirmation";
+import OrderInquiryEmail from "@/emails/OrderInquiryEmail";
 import { render } from "@react-email/render";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key");
@@ -18,76 +14,28 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Cart is empty", code: 400 }, { status: 400 });
     }
 
-    await connectDB();
+    const orderId = `INQ-${Date.now()}`;
 
-    // Optimistic Locking: Stock deduction
-    // We check and reduce stock for all items
-    for (const item of items) {
-      // Assuming item.id is the MongoDB ObjectId for the product
-      const product = await Product.findOneAndUpdate(
-        { _id: item.id, stock: { $gte: item.quantity } },
-        { $inc: { stock: -item.quantity } },
-        { new: true }
-      );
-
-      if (!product) {
-        return NextResponse.json(
-          { success: false, error: `Product ${item.name} is out of stock or insufficient quantity.`, code: 409 },
-          { status: 409 }
-        );
-      }
-    }
-
-    const orderId = `ORD-${Date.now()}`;
-
-    // Create Order in DB (Assuming Order model accepts this structure)
-    const newOrder = await Order.create({
-      orderId,
-      customerInfo: contactInfo,
-      items: items,
-      totalAmount: subtotal,
-      status: "PENDING_PAYMENT",
-    });
-
-    // Send Emails
+    // Send Inquiry Email
     try {
-      const ownerHtml = await render(OrderNotification({
-        orderId,
-        customerName: contactInfo.name,
-        customerEmail: contactInfo.email,
-        customerPhone: contactInfo.phone,
-        address: contactInfo.address,
-        city: contactInfo.city,
+      const ownerHtml = await render(OrderInquiryEmail({
+        contactInfo,
         items,
         subtotal
       }));
 
-      const customerHtml = await render(OrderConfirmation({
-        orderId,
-        customerName: contactInfo.name,
-        items,
-        subtotal
-      }));
-
-      // 1. To store owner
+      // Send to the store owner
       await resend.emails.send({
-        from: 'Nexus Core <orders@nexuscore.com>', // Assuming verified domain, or use Resend testing domain
-        to: ['prajapatiabhay@gmail.com'],
-        subject: `🛒 New Order [${orderId}] — Action Required`,
+        from: 'B. K. Infotech <onboarding@resend.dev>', // Using default resend testing domain
+        to: ['prajapatiabhay2003@gmail.com'],
+        subject: `New Order Inquiry: ${contactInfo.name} [${orderId}]`,
         html: ownerHtml,
         replyTo: contactInfo.email,
       });
 
-      // 2. To customer
-      await resend.emails.send({
-        from: 'Nexus Core <orders@nexuscore.com>',
-        to: [contactInfo.email],
-        subject: 'Order Confirmed — We\'ll be in touch shortly! 🎉',
-        html: customerHtml,
-      });
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
-      // We don't fail the checkout if email fails, but log it.
+      return NextResponse.json({ success: false, error: "Failed to send email inquiry", code: 500 }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, orderId }, { status: 201 });

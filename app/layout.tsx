@@ -1,29 +1,38 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { CartDrawer } from "@/components/store/CartDrawer";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
-const cormorant = Cormorant_Garamond({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-heading",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
+  display: "swap",
   variable: "--font-sans",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Nexus Core",
-  description: "Precision engineered in the dark.",
+  title: {
+    default: "B.K. Infotech — Enterprise IT Solutions | Nehru Place, Delhi",
+    template: "%s | B.K. Infotech",
+  },
+  description: "Delhi's trusted IT partner since 2006. Laptops, Desktops, Printers, UPS, Networking, Custom Gaming PCs & Enterprise Hardware from Dell, HP, Lenovo, Apple, Cisco & more.",
+  keywords: ["laptops", "desktops", "printers", "networking", "UPS", "custom PC", "Nehru Place", "Delhi", "IT hardware", "B.K. Infotech"],
+  openGraph: {
+    title: "B.K. Infotech — Enterprise IT Solutions",
+    description: "Powering businesses with laptops, desktops, networking, enterprise hardware & custom-built PCs since 2006.",
+    type: "website",
+    locale: "en_IN",
+    siteName: "B.K. Infotech",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "B.K. Infotech — Enterprise IT Solutions",
+    description: "Delhi's trusted IT partner. Sale & Repair: Laptop, Desktop, Printer, UPS, Networking & Accessories.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -32,13 +41,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${cormorant.variable} ${jetbrainsMono.variable} antialiased font-sans min-h-screen flex flex-col bg-[#0A0A0F] text-[#F5F0EB]`}>
-        {/* Simplified Navbar for demo, actual would be in components/layout/Navbar */}
+    <html lang="en" className="light" suppressHydrationWarning>
+      <body className={`${inter.variable} antialiased font-[family-name:var(--font-sans)] min-h-screen flex flex-col bg-background text-foreground`}>
         <Navbar />
         <CartDrawer />
         <main className="flex-1 flex flex-col">{children}</main>
-        <Toaster richColors position="top-center" theme="dark" />
+        <Footer />
+        <Toaster richColors position="top-center" theme="light" />
       </body>
     </html>
   );

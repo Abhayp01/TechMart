@@ -10,55 +10,60 @@ export default async function AdminProductsPage() {
     redirect("/login");
   }
 
-  await connectDB();
-  const products = await Product.find().sort({ createdAt: -1 });
+  let products: any[] = [];
+  try {
+    await connectDB();
+    products = await Product.find().sort({ createdAt: -1 });
+  } catch (err) {
+    console.warn("MongoDB unavailable in admin page.");
+  }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-[#F5F0EB] p-10">
+    <div className="min-h-screen bg-background text-foreground p-10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end border-b border-[#333] pb-6 mb-10">
+        <div className="flex justify-between items-end border-b border-border pb-6 mb-10">
           <div>
-            <h1 className="text-4xl font-heading font-bold mb-2">PRODUCT MATRIX</h1>
-            <p className="font-mono text-[#888]">SYSTEM INVENTORY MANAGEMENT</p>
+            <h1 className="text-4xl font-heading font-bold mb-2 text-foreground">Product Inventory</h1>
+            <p className="font-medium text-muted-foreground">Manage all products in B.K. Infotech store</p>
           </div>
-          <button className="bg-[#6C63FF] text-[#F5F0EB] font-bold py-3 px-6 rounded-none hover:bg-[#524ac4] transition-colors">
-            + NEW ENTRY
+          <button className="bg-primary text-primary-foreground font-semibold py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
+            + Add Product
           </button>
         </div>
 
-        <div className="bg-[#111] border border-[#333] overflow-x-auto">
+        <div className="bg-card border border-border rounded-xl overflow-x-auto shadow-sm">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#333] bg-[#0d0d14]">
-                <th className="p-4 font-mono text-xs text-[#888]">SKU</th>
-                <th className="p-4 font-mono text-xs text-[#888]">DESIGNATION</th>
-                <th className="p-4 font-mono text-xs text-[#888]">STOCK</th>
-                <th className="p-4 font-mono text-xs text-[#888]">PRICE</th>
-                <th className="p-4 font-mono text-xs text-[#888]">STATUS</th>
-                <th className="p-4 font-mono text-xs text-[#888] text-right">ACTION</th>
+              <tr className="border-b border-border bg-muted/30">
+                <th className="p-4 font-semibold text-xs text-muted-foreground uppercase tracking-wider">SKU</th>
+                <th className="p-4 font-semibold text-xs text-muted-foreground uppercase tracking-wider">Product Name</th>
+                <th className="p-4 font-semibold text-xs text-muted-foreground uppercase tracking-wider">Stock</th>
+                <th className="p-4 font-semibold text-xs text-muted-foreground uppercase tracking-wider">Price</th>
+                <th className="p-4 font-semibold text-xs text-muted-foreground uppercase tracking-wider">Status</th>
+                <th className="p-4 font-semibold text-xs text-muted-foreground uppercase tracking-wider text-right">Action</th>
               </tr>
             </thead>
             <tbody>
               {products.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-[#888] font-mono">NO DATA FOUND</td>
+                  <td colSpan={6} className="p-8 text-center text-muted-foreground font-medium">No products found. Add your first product.</td>
                 </tr>
               ) : (
                 products.map((product) => (
-                  <tr key={product._id.toString()} className="border-b border-[#222] hover:bg-[#1a1a24] transition-colors">
-                    <td className="p-4 font-mono text-sm text-[#6C63FF]">{product.sku || product._id.toString().substring(0,8)}</td>
-                    <td className="p-4 font-medium">{product.title}</td>
-                    <td className="p-4 font-mono">{product.stock}</td>
-                    <td className="p-4 font-mono">${product.price.toFixed(2)}</td>
+                  <tr key={product._id.toString()} className="border-b border-border hover:bg-muted/30 transition-colors">
+                    <td className="p-4 font-medium text-sm text-primary">{product.sku || product._id.toString().substring(0,8)}</td>
+                    <td className="p-4 font-medium text-foreground">{product.title || product.name}</td>
+                    <td className="p-4 font-medium text-foreground">{product.stock}</td>
+                    <td className="p-4 font-medium text-foreground">₹{product.price.toFixed(2)}</td>
                     <td className="p-4">
                       {product.stock > 0 ? (
-                        <span className="text-xs bg-green-500/10 text-green-400 px-2 py-1 rounded border border-green-500/20">ACTIVE</span>
+                        <span className="text-xs font-semibold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-md">In Stock</span>
                       ) : (
-                        <span className="text-xs bg-red-500/10 text-red-400 px-2 py-1 rounded border border-red-500/20">DEPLETED</span>
+                        <span className="text-xs font-semibold bg-red-100 text-red-600 px-2.5 py-1 rounded-md">Out of Stock</span>
                       )}
                     </td>
                     <td className="p-4 text-right">
-                      <button className="text-sm font-mono text-[#888] hover:text-[#F5F0EB] transition-colors">EDIT</button>
+                      <button className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors">Edit</button>
                     </td>
                   </tr>
                 ))

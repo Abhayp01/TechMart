@@ -41,10 +41,10 @@ export function FilterSidebar({ categoryId }: { categoryId: string }) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#222]">
-        <h3 className="font-heading font-bold text-xl text-[#F5F0EB]">FILTERS</h3>
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
+        <h3 className="font-heading font-bold text-xl text-foreground">FILTERS</h3>
         {activeFilterCount > 0 && (
-          <button onClick={clearFilters} className="text-xs font-mono text-[#EF4444] hover:text-red-400">
+          <button onClick={clearFilters} className="text-xs font-semibold text-red-500 hover:text-red-600 transition-colors">
             CLEAR ALL
           </button>
         )}
@@ -53,7 +53,7 @@ export function FilterSidebar({ categoryId }: { categoryId: string }) {
       <div className="space-y-8">
         {/* Availability Toggle */}
         <div className="flex items-center justify-between">
-          <span className="font-mono text-sm text-[#F5F0EB]">In Stock Only</span>
+          <span className="font-medium text-sm text-foreground">In Stock Only</span>
           <label className="relative inline-flex items-center cursor-pointer">
             <input 
               type="checkbox" 
@@ -66,7 +66,7 @@ export function FilterSidebar({ categoryId }: { categoryId: string }) {
                 router.push(`/products?${params.toString()}`);
               }}
             />
-            <div className="w-11 h-6 bg-[#222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6C63FF]"></div>
+            <div className="w-11 h-6 bg-muted border border-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
           </label>
         </div>
 
@@ -91,13 +91,13 @@ function FilterSection({ title, options, filterKey, searchParams, updateFilters 
   const selectedValues = searchParams.getAll(filterKey);
 
   return (
-    <div className="border-t border-[#222] pt-6">
+    <div className="border-t border-border pt-6">
       <button 
-        className="flex w-full items-center justify-between font-mono text-sm text-[#F5F0EB] mb-4"
+        className="flex w-full items-center justify-between font-semibold text-sm text-foreground mb-4"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{title.toUpperCase()}</span>
-        {isOpen ? <ChevronUp className="w-4 h-4 text-[#666]" /> : <ChevronDown className="w-4 h-4 text-[#666]" />}
+        {isOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
       </button>
       
       {isOpen && (
@@ -106,10 +106,10 @@ function FilterSection({ title, options, filterKey, searchParams, updateFilters 
             const isSelected = selectedValues.includes(opt);
             return (
               <label key={opt} className="flex items-center gap-3 cursor-pointer group">
-                <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${isSelected ? 'bg-[#6C63FF] border-[#6C63FF]' : 'border-[#444] group-hover:border-[#6C63FF]'}`}>
-                  {isSelected && <Check className="w-3 h-3 text-white" />}
+                <div className={`w-4 h-4 border rounded-sm flex items-center justify-center transition-colors ${isSelected ? 'bg-primary border-primary' : 'border-input group-hover:border-primary'}`}>
+                  {isSelected && <Check className="w-3 h-3 text-primary-foreground" />}
                 </div>
-                <span className={`text-sm ${isSelected ? 'text-[#F5F0EB]' : 'text-[#888] group-hover:text-[#ccc]'}`}>
+                <span className={`text-sm ${isSelected ? 'text-foreground font-medium' : 'text-muted-foreground group-hover:text-foreground'}`}>
                   {opt}
                 </span>
               </label>
