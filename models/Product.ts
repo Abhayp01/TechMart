@@ -6,11 +6,8 @@ const ProductSchema = new Schema({
   sku: { type: String, unique: true, required: true },
   brand: { type: String, required: true },
   brandSlug: { type: String, required: true },
-  category: {
-    type: String,
-    enum: ['laptops', 'desktops', 'networking', 'cctv', 'accessories'],
-    required: true
-  },
+  // Categories are configurable in the admin import (for example: mouse).
+  category: { type: String, required: true, lowercase: true, trim: true },
   subcategory: { type: String, required: true },
   description: { type: String, required: true },
   highlights: [{ type: String }],

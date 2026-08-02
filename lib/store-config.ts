@@ -53,7 +53,12 @@ export const storeConfig = {
       link: "/products?category=laptops",
       subcategories: ["Gaming Laptops", "Business Laptops", "Ultrabooks", "Student Laptops"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["Apple", "Dell", "HP", "Lenovo", "ASUS", "MSI"] },
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Apple", "Dell", "HP", "Lenovo", "ASUS", "MSI", "Acer", "Samsung"] },
+        { id: "ram", label: "RAM", type: "checkbox", options: ["4GB", "8GB", "16GB", "32GB", "64GB"] },
+        { id: "storage", label: "Storage", type: "checkbox", options: ["256GB SSD", "512GB SSD", "1TB SSD", "2TB SSD", "1TB HDD"] },
+        { id: "processor", label: "Processor", type: "checkbox", options: ["Intel i3", "Intel i5", "Intel i7", "Intel i9", "AMD Ryzen 5", "AMD Ryzen 7", "AMD Ryzen 9", "Apple M2", "Apple M3"] },
+        { id: "displaySize", label: "Display Size", type: "checkbox", options: ["13\"", "14\"", "15.6\"", "16\"", "17.3\""] },
+        { id: "os", label: "Operating System", type: "checkbox", options: ["Windows 11", "Windows 11 Pro", "macOS", "DOS"] },
       ],
     },
     {
@@ -64,7 +69,10 @@ export const storeConfig = {
       link: "/products?category=desktops",
       subcategories: ["Pre-built PCs", "All-in-One PCs", "Mini PCs", "Gaming Desktops"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["Apple", "Dell", "HP", "Lenovo"] },
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Apple", "Dell", "HP", "Lenovo", "Acer", "Zebronics"] },
+        { id: "processor", label: "Processor", type: "checkbox", options: ["Intel i3", "Intel i5", "Intel i7", "Intel i9", "AMD Ryzen 5", "AMD Ryzen 7", "AMD Ryzen 9"] },
+        { id: "ram", label: "RAM", type: "checkbox", options: ["8GB", "16GB", "32GB", "64GB"] },
+        { id: "formFactor", label: "Form Factor", type: "checkbox", options: ["Tower", "SFF", "Mini", "All-in-One"] },
       ],
     },
     {
@@ -75,7 +83,25 @@ export const storeConfig = {
       link: "/products?category=networking",
       subcategories: ["Routers", "Switches", "Access Points", "Firewalls", "Cabling"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["D-Link", "Cisco", "TP-Link"] },
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Cisco", "TP-Link", "Netgear", "Ubiquiti", "D-Link"] },
+        { id: "standard", label: "Wi-Fi Standard", type: "checkbox", options: ["WiFi 5", "WiFi 6", "WiFi 6E"] },
+        { id: "speed", label: "Port Speed", type: "checkbox", options: ["100Mbps", "1Gbps", "10Gbps"] },
+        { id: "ports", label: "No. of Ports", type: "checkbox", options: ["4", "8", "16", "24", "48"] },
+        { id: "poe", label: "PoE Support", type: "checkbox", options: ["Yes", "No"] },
+      ],
+    },
+    {
+      id: "cctv",
+      name: "CCTV & Surveillance",
+      description: "IP cameras, NVR kits & surveillance solutions",
+      image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80",
+      link: "/products?category=cctv",
+      subcategories: ["IP Cameras", "Analog Cameras", "NVR/DVR", "Complete Kits"],
+      filters: [
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Hikvision", "Dahua", "CP Plus", "Godrej"] },
+        { id: "resolution", label: "Resolution", type: "checkbox", options: ["2MP", "4MP", "4K", "8MP"] },
+        { id: "cameraType", label: "Camera Type", type: "checkbox", options: ["Dome", "Bullet", "PTZ", "Box"] },
+        { id: "weatherproof", label: "Weatherproof", type: "checkbox", options: ["IP67", "IP66", "Indoor Only"] },
       ],
     },
     {
@@ -86,7 +112,7 @@ export const storeConfig = {
       link: "/products?category=printers",
       subcategories: ["Laser Printers", "Inkjet Printers", "All-in-One Printers", "Label Printers"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["HP", "Epson", "Canon", "Brother"] },
+        { id: "brand", label: "Brand", type: "checkbox", options: ["HP", "Epson", "Canon", "Brother", "Xerox"] },
       ],
     },
     {
@@ -97,7 +123,7 @@ export const storeConfig = {
       link: "/products?category=ups",
       subcategories: ["Line Interactive", "Online UPS", "Inverters"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["APC", "Luminous", "Microtek"] },
+        { id: "brand", label: "Brand", type: "checkbox", options: ["APC", "Luminous", "Microtek", "Numeric", "Eaton"] },
       ],
     },
     {
@@ -108,7 +134,8 @@ export const storeConfig = {
       link: "/products?category=accessories",
       subcategories: ["Keyboards", "Mice", "Headsets", "Storage", "Webcams", "Cables"],
       filters: [
-        { id: "brand", label: "Brand", type: "checkbox", options: ["Logitech", "HP", "Dell", "SanDisk"] },
+        { id: "brand", label: "Brand", type: "checkbox", options: ["Logitech", "HP", "Dell", "SanDisk", "Seagate", "WD", "APC", "LG"] },
+        { id: "compatibility", label: "Compatibility", type: "checkbox", options: ["Universal", "Windows", "Mac"] },
       ],
     },
     {

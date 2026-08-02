@@ -41,14 +41,15 @@ const MOCK_PRODUCT = {
   inbox: ["Laptop", "65W Adapter", "Quick Start Guide"],
 };
 
-export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   let product: any = null;
 
   try {
     await connectDB();
-    product = await Product.findOne({ slug: params.slug });
+    product = await Product.findOne({ slug });
     if (!product) {
-      product = await Product.findOne({ sku: params.slug });
+      product = await Product.findOne({ sku: slug });
     }
   } catch (err) {
     console.warn("MongoDB unavailable on product detail page, using mock data.");

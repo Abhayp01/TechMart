@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${inter.variable} antialiased font-[family-name:var(--font-sans)] min-h-screen flex flex-col bg-background text-foreground`}>
         <Navbar />
         <CartDrawer />

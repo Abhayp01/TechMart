@@ -94,7 +94,7 @@ export default function LoginPage() {
         <div className="mt-8 text-center border-t border-[#222] pt-6">
           <p className="text-[#888] font-mono text-xs">
             NO CLEARANCE?{" "}
-            <Link href="/signup" className="text-[#6C63FF] hover:text-[#F5F0EB] transition-colors ml-2">
+            <Link href="/register" className="text-[#6C63FF] hover:text-[#F5F0EB] transition-colors ml-2">
               REQUEST ACCESS [→]
             </Link>
           </p>

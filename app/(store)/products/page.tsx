@@ -4,6 +4,7 @@ import { FilterSidebar } from "@/components/store/FilterSidebar";
 import connectDB from "@/lib/db";
 import Product from "@/models/Product";
 import { Filter, Grid, List, SlidersHorizontal } from "lucide-react";
+import { Suspense } from "react";
 
 const MOCK_PRODUCTS = [
   // Laptops
@@ -59,11 +60,16 @@ const MOCK_PRODUCTS = [
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  // Await the searchParams Promise before accessing properties
+  const resolvedParams = await searchParams;
+
   // Parse search params into MongoDB query
-  const category = searchParams.category as string | undefined;
-  const inStock = searchParams.inStock === "true";
+  const category = resolvedParams.category as string | undefined;
+  const inStock = resolvedParams.inStock === "true";
+  const priceMin = resolvedParams.priceMin ? Number(resolvedParams.priceMin) : undefined;
+  const priceMax = resolvedParams.priceMax ? Number(resolvedParams.priceMax) : undefined;
   
   let query: any = {};
   if (category) {
@@ -74,6 +80,12 @@ export default async function ProductsPage({
     query.stock = { $gt: 0 };
   }
 
+  if (priceMin !== undefined || priceMax !== undefined) {
+    query.price = {};
+    if (priceMin !== undefined) query.price.$gte = priceMin;
+    if (priceMax !== undefined) query.price.$lte = priceMax;
+  }
+
   // Handle dynamic filters mapping to "specs.xxxx"
   const catConfig = category 
     ? (storeConfig.categories.find(c => c.id === category) || storeConfig.categories[0])
@@ -81,7 +93,7 @@ export default async function ProductsPage({
   
   if (catConfig) {
     catConfig.filters.forEach(filter => {
-      const filterValues = searchParams[filter.id];
+      const filterValues = resolvedParams[filter.id];
       if (filterValues) {
         const valuesArray = Array.isArray(filterValues) ? filterValues : [filterValues];
         if (filter.id === "brand") {
@@ -137,7 +149,9 @@ export default async function ProductsPage({
           {/* Sidebar */}
           <div className="hidden lg:block w-64 shrink-0">
             <div className="sticky top-28">
-              <FilterSidebar categoryId={category || ""} />
+              <Suspense fallback={<div className="h-40 animate-pulse bg-muted/50 rounded-xl" />}>
+                <FilterSidebar categoryId={category || ""} />
+              </Suspense>
             </div>
           </div>
 
@@ -155,6 +169,7 @@ export default async function ProductsPage({
                     key={p._id.toString()}
                     _id={p._id.toString()}
                     name={p.name}
+                    slug={p.slug}
                     price={p.price}
                     mrp={p.mrp}
                     sku={p.sku}
