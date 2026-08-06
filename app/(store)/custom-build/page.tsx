@@ -10,13 +10,33 @@ export default function CustomBuildPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate submission delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast.success("Build request submitted! We will contact you soon.");
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
+    const form = new FormData(e.currentTarget);
+
+    try {
+      const res = await fetch("/api/custom-build", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.get("name"),
+          phone: form.get("phone"),
+          useCase: form.get("useCase"),
+          budget: form.get("budget"),
+          requirements: form.get("requirements"),
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Unable to submit build request.");
+      }
+
+      toast.success("Build request sent! Our experts will contact you soon.");
+      e.currentTarget.reset();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Unable to submit build request.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -34,12 +54,12 @@ export default function CustomBuildPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <label className="text-sm font-semibold text-foreground">Full Name *</label>
-                <input required type="text" className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="John Doe" />
+                <input name="name" required type="text" autoComplete="name" className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="John Doe" />
               </div>
               
               <div className="space-y-3">
                 <label className="text-sm font-semibold text-foreground">Phone Number *</label>
-                <input required type="tel" className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="+91 98765 43210" />
+                <input name="phone" required type="tel" autoComplete="tel" className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="+91 98765 43210" />
               </div>
             </div>
 
@@ -66,7 +86,7 @@ export default function CustomBuildPage() {
 
             <div className="space-y-3">
               <label className="text-sm font-semibold text-foreground">Estimated Budget (₹)</label>
-              <select className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+              <select name="budget" defaultValue="under50k" className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
                 <option value="under50k">Under ₹50,000</option>
                 <option value="50k-80k">₹50,000 - ₹80,000</option>
                 <option value="80k-150k">₹80,000 - ₹1,50,000</option>
@@ -76,7 +96,7 @@ export default function CustomBuildPage() {
 
             <div className="space-y-3">
               <label className="text-sm font-semibold text-foreground">Specific Requirements or Preferences</label>
-              <textarea 
+                <textarea name="requirements"
                 rows={4} 
                 className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" 
                 placeholder="E.g., I need a lot of storage, prefer Intel over AMD, need RGB lighting..."
