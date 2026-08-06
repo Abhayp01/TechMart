@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Hexagon } from "lucide-react";
+import { ArrowRight, Hexagon, LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -17,101 +17,40 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
-      const res = await fetch("/api/auth/register", { // NOTE: The API might be /api/auth/signup, but we are using /register based on instructions
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
+      const res = await fetch("/api/auth/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, password }) });
       const data = await res.json();
-
-      if (data.success || res.ok) {
-        // Successfully registered
-        router.push("/");
-        router.refresh();
-      } else {
-        setError(data.message || data.error || "Registration failed");
-      }
-    } catch (err: any) {
-      setError("An unexpected error occurred.");
-    } finally {
-      setLoading(false);
-    }
+      if (data.success || res.ok) { router.push("/"); router.refresh(); }
+      else setError(data.message || data.error || "We couldn't create your account. Please try again.");
+    } catch { setError("Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] flex flex-col justify-center items-center p-6 text-[#F5F0EB]">
-      <Link href="/" className="flex items-center gap-3 mb-12 group">
-        <Hexagon className="h-8 w-8 text-[#F5F0EB] group-hover:text-[#6C63FF] transition-colors" />
-        <span className="font-heading font-bold text-3xl tracking-[0.15em] text-[#F5F0EB]">
-          NEXUS CORE
-        </span>
-      </Link>
-
-      <div className="w-full max-w-md bg-[#111] border border-[#222] p-10">
-        <h1 className="text-2xl font-heading font-semibold mb-2">NEW CLEARANCE</h1>
-        <p className="text-[#888] font-mono text-sm mb-8 tracking-wide">REGISTER FOR SYSTEM ACCESS</p>
-
-        {error && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 mb-6 text-sm font-mono">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-mono text-[#888] mb-2 tracking-widest">DESIGNATION (NAME)</label>
-            <input
-              type="text"
-              required
-              className="w-full bg-[#0A0A0F] border border-[#333] p-4 text-[#F5F0EB] focus:border-[#6C63FF] outline-none rounded-none font-mono transition-colors"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+    <main className="min-h-screen bg-gradient-mesh px-4 py-8 text-foreground sm:px-6 sm:py-12">
+      <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center justify-center">
+        <div className="grid w-full overflow-hidden rounded-3xl border border-border bg-card shadow-float lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative hidden overflow-hidden bg-gradient-to-br from-violet-700 via-indigo-600 to-blue-600 p-12 text-white lg:flex lg:flex-col lg:justify-between">
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-2xl" /><div className="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-cyan-300/20 blur-3xl" />
+            <Link href="/" className="relative flex items-center gap-2 text-lg font-bold tracking-tight"><Hexagon className="h-7 w-7" /> NEXUS CORE</Link>
+            <div className="relative"><p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-violet-100">Join the community</p><h1 className="max-w-sm text-4xl font-bold leading-tight">Build a setup you’re proud of.</h1><p className="mt-5 max-w-sm text-violet-100">Create your free account to save your details, track orders, and shop smarter.</p></div>
+            <div className="relative flex items-center gap-3 text-sm text-violet-100"><ShieldCheck className="h-5 w-5" /> Free account. Better shopping.</div>
           </div>
 
-          <div>
-            <label className="block text-sm font-mono text-[#888] mb-2 tracking-widest">IDENTIFIER (EMAIL)</label>
-            <input
-              type="email"
-              required
-              className="w-full bg-[#0A0A0F] border border-[#333] p-4 text-[#F5F0EB] focus:border-[#6C63FF] outline-none rounded-none font-mono transition-colors"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <div className="p-7 sm:p-12 lg:p-16">
+            <div className="mb-10 lg:hidden"><Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-primary"><Hexagon className="h-7 w-7" /> NEXUS CORE</Link></div>
+            <div className="mb-8"><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Create your account</p><h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Join NEXUS CORE</h2><p className="mt-3 text-muted-foreground">Set up your account and make every purchase easier.</p></div>
+            {error && <div role="alert" className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</div>}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <label className="block text-sm font-medium">Full name<span className="relative mt-2 block"><UserRound className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" /><input type="text" required autoComplete="name" placeholder="Your name" className="w-full rounded-xl border border-border bg-surface py-3.5 pl-12 pr-4 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10" value={name} onChange={(e) => setName(e.target.value)} /></span></label>
+              <label className="block text-sm font-medium">Email address<span className="relative mt-2 block"><Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" /><input type="email" required autoComplete="email" placeholder="you@example.com" className="w-full rounded-xl border border-border bg-surface py-3.5 pl-12 pr-4 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10" value={email} onChange={(e) => setEmail(e.target.value)} /></span></label>
+              <label className="block text-sm font-medium">Password<span className="relative mt-2 block"><LockKeyhole className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" /><input type="password" required minLength={6} autoComplete="new-password" placeholder="At least 6 characters" className="w-full rounded-xl border border-border bg-surface py-3.5 pl-12 pr-4 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10" value={password} onChange={(e) => setPassword(e.target.value)} /></span></label>
+              <button type="submit" disabled={loading} className="group mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 font-semibold text-primary-foreground shadow-glow-blue transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60">{loading ? "Creating your account..." : "Create account"}<ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" /></button>
+            </form>
+            <p className="mt-8 text-center text-sm text-muted-foreground">Already have an account? <Link href="/login" className="font-semibold text-primary hover:underline">Sign in</Link></p>
           </div>
-
-          <div>
-            <label className="block text-sm font-mono text-[#888] mb-2 tracking-widest">PASSPHRASE</label>
-            <input
-              type="password"
-              required
-              className="w-full bg-[#0A0A0F] border border-[#333] p-4 text-[#F5F0EB] focus:border-[#6C63FF] outline-none rounded-none font-mono transition-colors"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[#F5F0EB] text-[#0A0A0F] font-bold py-4 hover:bg-[#6C63FF] hover:text-[#F5F0EB] transition-all tracking-[0.2em] text-sm disabled:opacity-50 mt-4"
-          >
-            {loading ? "PROCESSING..." : "REQUEST ACCESS"}
-          </button>
-        </form>
-
-        <div className="mt-8 text-center border-t border-[#222] pt-6">
-          <p className="text-[#888] font-mono text-xs">
-            ALREADY CLEARED?{" "}
-            <Link href="/login" className="text-[#6C63FF] hover:text-[#F5F0EB] transition-colors ml-2">
-              INITIATE SESSION [→]
-            </Link>
-          </p>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
